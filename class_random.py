@@ -19,21 +19,20 @@
 #   with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 #   24 Oct 26   0.1   - Initial version - MT
+#   27 Oct 26         - Return the initial seed on first use - MT                  -
 #
 
 import decimal
 
-# Namir SHAMMAS exp()
+# HP67/97 - Period length 500,000
 
-SEED = "0.89308200"
+SEED = "0.5284163"
 
+_a = decimal.Decimal("997")
 _m = decimal.Decimal("1")
 
-def _rand(_r):
-  _A = 1 - _r + _r**2 - _r**3
-  _B = 1 + _r - _r**2
-  _r = (_A + _A.exp() + _B.exp()).exp() % _m
-  _r -= _r.to_integral_value(rounding=decimal.ROUND_FLOOR)  # frac().
+def _rand(_r):  # r_{n+1}=(997 * r_{n}) \mod 1
+  _r = (_a * _r)  % _m
   return _r
 
 
@@ -46,9 +45,14 @@ class random:
     if _seed is None:
       _seed = SEED
     self._seed = decimal.Decimal(str(_seed))
+    self._init = True
 
   def random(self):
-    self._seed = _rand(self._seed)
+    if self._init:  # Return initial seed.
+      self._seed = self._seed
+      self._init = False
+    else:
+      self._seed = _rand(self._seed)
     return float(self._seed)
 
   def randrange(self, _start, _stop=None, _step=1):

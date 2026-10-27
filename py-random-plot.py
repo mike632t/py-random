@@ -37,10 +37,11 @@
 #                       with a subset of the python random number generator
 #                       properties and methods.  Allowing either to be used
 #                       simply by selecting which class is imported - MT
+#   27 Oct 26         - Reduced font size to 12 pixels - MT
 #
 
 import os, sys, math, time, pygame
-import random
+import class_random as random  # Use custom generator class.
 
 NAME = "Random Number Scatter Plot"
 VERSION = "0.2"
@@ -174,7 +175,7 @@ pygame.init()
 _screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Random Number Scatter Plot")
 
-_font = pygame.font.SysFont("Arial", min(16, MARGIN // 2), bold=False)
+_font = pygame.font.SysFont("Arial", min(12, MARGIN // 2), bold=False)
 
 #
 #   Draw Axis.
