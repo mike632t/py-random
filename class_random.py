@@ -24,15 +24,16 @@
 
 import decimal
 
-# HP67/97 - Period length 500,000
+# HP34C - Period length 1,000,000
 
-SEED = "0.5284163"
+SEED = "0.2356"
 
-_a = decimal.Decimal("997")
+_a = decimal.Decimal("9821")
+_c = decimal.Decimal("0.211327")  # _c is non zero
 _m = decimal.Decimal("1")
 
-def _rand(_r):  # r_{n+1}=(997 * r_{n}) \mod 1
-  _r = (_a * _r)  % _m
+def _rand(_r):  # r_{n+1}=(9821 * r_{n} + 0.211327) \mod 1
+  _r = (_a * _r + _c) % _m
   return _r
 
 
@@ -87,7 +88,7 @@ def seed(_seed=None, _version=2):
 def random():
   return _instance.random()
 
-def randrange(start, _stop=None, _step=1):
+def randrange(_start, _stop=None, _step=1):
   return _instance.randrange(_start, _stop, _step)
 
 def randint(_start, _stop):
@@ -99,7 +100,7 @@ def uniform(_start, _stop):
 def choice(_sequence):
   return _instance.choice(_sequence)
 
-def shuffle(x):
+def shuffle(_list):
   return _instance.shuffle(_list)
 
 
