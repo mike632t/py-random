@@ -37,14 +37,15 @@
 #                       with a subset of the python random number generator
 #                       properties and methods.  Allowing either to be used
 #                       simply by selecting which class is imported - MT
-#   27 Oct 26         - Reduced font size to 12 pixels - MT
+#   27 Oct 26   0.3   - Reduced font size to 12 pixels - MT
+#                     - Added option to skip the initial seed value - MT
 #
 
 import os, sys, math, time, pygame
 import class_random as random  # Use custom generator class.
 
 NAME = "Random Number Scatter Plot"
-VERSION = "0.2"
+VERSION = "0.3"
 
 COLUMNS = 8  # Number of columns of coordinates to print on a line (1 - 8).
 
@@ -105,7 +106,9 @@ def _about():
   sys.stdout.write(
     "Usage: " + sys.argv[0] + " [OPTION]...\n" +
     "Plots pains of random number values (between 0 and 1) .\n" + "\n" +
-    "      --print              print each pair of numbers \n" +
+    "      --delay  <seconds>   wait for <seconds> between points\n" +
+    "      --print              print each pair of numbers\n" +
+    "      --skip               skip the initial seed value\n" +
     "  -?, --help               display this help and exit\n" +
     "      --version            output version information and exit\n" +
     "\n")
@@ -133,9 +136,10 @@ _wait = INTERVAL
 #
 #  Parse command line.
 #
-_verbose = 0
-_debug = False
-_print = False
+
+_skip = False  # Skip the initial seed.
+_print = False  # Print coordinate pairs.
+
 _count = 0
 while _count < len(sys.argv):
   _arg = sys.argv [_count]
@@ -144,6 +148,8 @@ while _count < len(sys.argv):
       _about()
     elif _arg in ["-v", "--version"]:
       _version()
+    elif _arg in ["--skip"]:
+      _skip = True
     elif _arg in ["--print"]:
       _print = True
       _wait = 0.05
@@ -220,7 +226,7 @@ _points = []
 _running = True
 _paused = False
 
-random.seed("0.5284163")
+if _skip: random.random()  # Skip the seed value.
 
 while _running:
 
