@@ -41,6 +41,7 @@
 #                     - Add option to skip the initial seed value - MT
 #   28 Oct 26         - Add option to pause updates when a specified number
 #                       of points have been plotted - MT
+#                     - Fixed issues parsing values on command line - MT
 #
 
 import os, sys, math, time, pygame
@@ -156,27 +157,22 @@ while _count < len(sys.argv):
     elif _arg in ["--print"]:
       _print = True
       _wait = 0.05
-    elif _arg in "--delay":
-      if _count < len(sys.argv):
-        if sys.argv[_count + 1][:1] != "-":
-          try:
-            _wait = float(sys.argv[_count + 1])
-            if not math.isfinite(_wait) or _wait > 0.5:
-                raise ValueError
-            _wait = max(0.00005, _wait)
-          except ValueError:
-            _error("invalid delay")
-          _count += 1
-    elif _arg in "--limit":
-      if _count < len(sys.argv):
-        if sys.argv[_count + 1][:1] != "-":
-          try:
-            _limit = int(sys.argv[_count + 1])
-            if not math.isfinite(_limit) or _limit < 1:
-                raise ValueError
-          except ValueError:
-            _error("invalid limit '" + str(_limit) + "'")
-          _count += 1
+    elif _arg in ["--delay"]:
+      try:
+        _wait = float(sys.argv[_count + 1])  # Checks if delay is a floating point value.
+        if not math.isfinite(_wait) or _wait > 0.5 or _wait < 0: raise ValueError  # Must be a positive value between zero and 0.5.
+        _wait = max(0.00005, _wait)
+        _count += 1
+      except(IndexError, ValueError):
+        _error("invalid delay")
+    elif _arg in ["--limit"]:
+      try:
+        _limit = int(sys.argv[_count + 1])  # Checks if limit is an integer.
+        if _limit < 1:    # Must be greater than 1.
+            raise ValueError
+        _count += 1
+      except(IndexError, ValueError):
+        _error("invalid limit")
     else:
       if _arg[:2] == "--":
         _error ("unrecognized option -- '" + (_arg[2:] + "'"))
