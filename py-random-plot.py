@@ -108,7 +108,7 @@ def _format(_int):
 def _about():
   sys.stdout.write(
     "Usage: " + sys.argv[0] + " [OPTION]...\n" +
-    "Plots pains of random number values (between 0 and 1) .\n" + "\n" +
+    "Plots pairs of random number values (between 0 and 1) .\n" + "\n" +
     "      --delay  <seconds>   wait for <seconds> between points\n" +
     "      --print              print each pair of numbers\n" +
     "      --skip               skip the initial seed value\n" +

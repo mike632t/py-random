@@ -18,14 +18,14 @@ To make it easier to see the how the points are distributed the most recent
 ## Usage
 
 ```
-   Usage: py-random-draw.py [OPTION]...
+Usage: ./py-random-plot.py [OPTION]...
+Plots pairs of random number values (between 0 and 1) .
 
-     --delay <seconds>   Wait for <seconds> between points
-     --limit <number>    Pause after plotting <number> of points
-     --print             Print each pair of coordinates
-     --skip              Skip the initial seed value
-     -?, --help          Display help and exit
-     -v, --version       Display version information and exit
+      --delay  <seconds>   wait for <seconds> between points
+      --print              print each pair of numbers
+      --skip               skip the initial seed value
+  -?, --help               display this help and exit
+      --version            output version information and exit
 ```
 
 - `--delay <seconds>` Sets the delay between plotted points in seconds.
@@ -39,16 +39,16 @@ To make it easier to see the how the points are distributed the most recent
 
 ## Controls
 
-| Key | Action |
-|---|---|
-| **Space** | Pause plotting. While paused, each press advances the plot by one point. |
-| **Enter** | Resume continuous plotting. |
-| **Escape** | Quit the application. |
-| **Up arrow** | Halve the delay between points, down to the minimum delay. |
+| Key            | Action  |
+|----------------|---------|
+| **Space**      | Pause plotting. While paused, each press advances the plot by one point. |
+| **Enter**      | Resume continuous plotting. |
+| **Escape**     | Quit the application. |
+| **Up arrow**   | Halve the delay between points, down to the minimum delay. |
 | **Down arrow** | Double the delay between points, up to 0.1 seconds. |
 
 
-## Replacement random number class
+## A replacement random number class
 
 A replacement for python's standard random number generator that implements
 a subset of the usual interface provides an easy way to modify the way that
