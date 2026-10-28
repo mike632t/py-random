@@ -24,12 +24,12 @@
 
 import decimal
 
-# HP34C - Period length 1,000,000
+# HP67 - Period length 5,000,000
 
-SEED = "0.2356"
+SEED = "0.5284163"
 
-_a = decimal.Decimal("9821")
-_c = decimal.Decimal("0.211327")  # _c is non zero
+_a = decimal.Decimal("997")
+_c = decimal.Decimal("0")
 _m = decimal.Decimal("1")
 
 def _rand(_r):  # r_{n+1}=(9821 * r_{n} + 0.211327) \mod 1
