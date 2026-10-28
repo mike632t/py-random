@@ -38,7 +38,9 @@
 #                       properties and methods.  Allowing either to be used
 #                       simply by selecting which class is imported - MT
 #   27 Oct 26   0.3   - Reduced font size to 12 pixels - MT
-#                     - Added option to skip the initial seed value - MT
+#                     - Add option to skip the initial seed value - MT
+#   28 Oct 26         - Add option to pause updates when a specified number
+#                       of points have been plotted - MT
 #
 
 import os, sys, math, time, pygame
@@ -139,6 +141,7 @@ _wait = INTERVAL
 
 _skip = False  # Skip the initial seed.
 _print = False  # Print coordinate pairs.
+_limit = None
 
 _count = 0
 while _count < len(sys.argv):
@@ -162,7 +165,17 @@ while _count < len(sys.argv):
                 raise ValueError
             _wait = max(0.00005, _wait)
           except ValueError:
-            error("invalid delay")
+            _error("invalid delay")
+          _count += 1
+    elif _arg in "--limit":
+      if _count < len(sys.argv):
+        if sys.argv[_count + 1][:1] != "-":
+          try:
+            _limit = int(sys.argv[_count + 1])
+            if not math.isfinite(_limit) or _limit < 1:
+                raise ValueError
+          except ValueError:
+            _error("invalid limit '" + str(_limit) + "'")
           _count += 1
     else:
       if _arg[:2] == "--":
@@ -221,8 +234,8 @@ for _count in range(11):
 #   Plot points until window is closed.
 #
 
-_count = 0
-_points = []
+_count = 0  # Number of points plotted.
+_points = []  # List of the last 1000 points plotted.
 _running = True
 _paused = False
 
@@ -230,9 +243,7 @@ if _skip: random.random()  # Skip the seed value.
 
 while _running:
 
-  # Update counter
-
-  if _count % 1000 == 0:
+  if _count % 1000 == 0:  # Update counter evert 1K points.
     if _label_rect:_screen.fill(WHITE, _label_rect)
     _label = _font.render("n > " + _format(_count), True, BLACK)
     _label_rect = _label.get_rect()
@@ -255,6 +266,10 @@ while _running:
         _wait = max(0.00005, _wait / 2)
       elif event.key == pygame.K_DOWN:
         _wait = min(0.1, _wait * 2)
+
+  if (_count == _limit):  # Pause when the specified limit is reached.
+    sys.stdout.flush()
+    _paused = True
 
   if not _paused:
     _update()
