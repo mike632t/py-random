@@ -7,7 +7,7 @@
 #   The latest point is shown in RED with the most recent 1000 points shown
 #   in BLUE, older points are shown in GREY.
 #
-#   While the points are being plotted the followign keys can be used:
+#   While the points are being plotted the following keys can be used:
 #
 #   `Space` pauses the updates and allows points to be drawn one at a time.
 #
@@ -110,6 +110,7 @@ def _about():
     "Usage: " + sys.argv[0] + " [OPTION]...\n" +
     "Plots pairs of random number values (between 0 and 1) .\n" + "\n" +
     "      --delay  <seconds>   wait for <seconds> between points\n" +
+    "      --limit  <count>     pause after plotting <count> points\n" +
     "      --print              print each pair of numbers\n" +
     "      --skip               skip the initial seed value\n" +
     "  -?, --help               display this help and exit\n" +

@@ -22,6 +22,7 @@ Usage: ./py-random-plot.py [OPTION]...
 Plots pairs of random number values (between 0 and 1) .
 
       --delay  <seconds>   wait for <seconds> between points
+      --limit  <count>     pause after plotting <count> points
       --print              print each pair of numbers
       --skip               skip the initial seed value
   -?, --help               display this help and exit
