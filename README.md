@@ -72,15 +72,7 @@ To avoid rounding errors it uses decimal arithmetic internally and converts
 the generated values to floats.  To modify the random number generator  you
 just need to replace the rand() function.
 
-
-## Files
-
-| File | Description |
-|---|---|
-| `py-random-draw.py` | Main application. Generates and plots coordinate pairs using Pygame. |
-| `class_random.py` | Custom pseudo-random number generator and a subset of the Python `random` module interface. |
-
-Keep both files in the same directory.
+The class module should be in the same folder as the python script.
 
 
 ## Prerequsites
@@ -89,7 +81,6 @@ Keep both files in the same directory.
 - Pygame
 
 Install Pygame using pip:
-
 ```
 python3 -m pip install pygame
 ```
