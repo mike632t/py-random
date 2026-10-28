@@ -7,9 +7,9 @@ for formal statistical testing.  However, a scatter plot can reveal visible
 patterns,  clustering, or other irregularities that might otherwise not  be
 noticed
 
-Using a seperate class that provides a replacement the python random number
+Using a separate class that provides a replacement the python random number
 generator  with a subset of the standard interface interface allows for the
-behaviour of different algorythms to be compaired.
+behaviour of different algorithms to be compared.
 
 To make it easier to see the how the points are distributed the most recent
 1,000 points are shown in blue, with any older points shown in grey.
@@ -75,7 +75,7 @@ just need to replace the rand() function.
 The class module should be in the same folder as the python script.
 
 
-## Prerequsites
+## Prerequisites
 
 - Python 3
 - Pygame
